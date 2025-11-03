@@ -1,6 +1,8 @@
 
 import streamlit as st
 from dotenv import load_dotenv
+
+st.set_page_config(page_title="LangChain Demo", page_icon=":robot:")
 import os
 #As Langchain team has been working aggresively on improving the tool, we can see a lot of changes happening every weeek,
 #As a part of it, the below import has been depreciated
@@ -23,7 +25,6 @@ from langchain.schema import (
 )
 
 # From here down is all the StreamLit UI
-st.set_page_config(page_title="LangChain Demo", page_icon=":robot:")
 st.header("Hey, je suis NIAPPA AI, demandez-moi n'importe quoi!")
 
 
