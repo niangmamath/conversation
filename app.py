@@ -52,7 +52,10 @@ def get_text():
     return input_text
 
 
-chat = ChatOpenAI(temperature=0)
+chat = ChatOpenAI(
+    temperature=0,
+    openai_api_key=os.getenv("OPENAI_API_KEY")
+)
 
 
 
