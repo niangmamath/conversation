@@ -52,12 +52,24 @@ def get_text():
     return input_text
 
 
-chat = ChatOpenAI(
+#chat = ChatOpenAI(
     temperature=0,
     openai_api_key=os.getenv("OPENAI_API_KEY")
-)
+    #)
 
-
+# Try to build an explicit OpenAI client and pass it to ChatOpenAI.
+# This avoids letting LangChain construct the client with kwargs that
+# the installed OpenAI client may not accept (e.g. 'proxies').
+try:
+    from openai import OpenAI as OpenAIClient
+    openai_client = OpenAIClient(api_key=os.getenv("OPENAI_API_KEY"))
+    chat = ChatOpenAI(temperature=0, client=openai_client)
+except Exception:
+    # Fallback: let ChatOpenAI try to initialize itself using the API key
+    chat = ChatOpenAI(
+        temperature=0,
+        openai_api_key=os.getenv("OPENAI_API_KEY")
+    )
 
 
 user_input=get_text()
